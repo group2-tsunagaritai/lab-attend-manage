@@ -5,7 +5,7 @@ export default function Pikachu() {
   console.log("data", data);
   // 最初だけAPIを叩く
   useEffect(() => {
-      // 同じものを表示しても面白くないからランダムで
+    // 同じものを表示しても面白くないからランダムで
     const number = Math.floor(Math.random() * 904 + 1);
     const fetchData = async () => {
       const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${number}`);
@@ -18,7 +18,7 @@ export default function Pikachu() {
   // dataに中身が入っていれば以下の要素を表示
   else
     return (
-      <div className="m-4">
+      <div className="box m-4" style={{ width: "fit-content" }}>
         <img
           style={{ imageRendering: "pixelated" }}
           width="192px"
@@ -26,7 +26,7 @@ export default function Pikachu() {
           src={data.sprites["front_default"]}
           alt={data.name}
         />
-        <table className="table">
+        <table className="table m-auto">
           <tbody>
             <tr>
               <td>id</td>
