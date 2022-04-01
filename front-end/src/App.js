@@ -6,6 +6,7 @@ import Ask from "./pages/Ask";
 import Counter from "./pages/Counter";
 import Home from "./pages/Home";
 import Index from "./components/Index";
+import Pikachu from "./pages/Pikachu";
 function App() {
   return (
     <div className="App">
@@ -15,6 +16,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/counter" element={<Counter />} />
           <Route path="/ask" element={<Ask />} />
+          <Route path="/pikachu" element={<Pikachu />} />
         </Routes>
       </BrowserRouter>
     </div>
