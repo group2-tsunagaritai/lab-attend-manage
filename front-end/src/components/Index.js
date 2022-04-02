@@ -1,5 +1,5 @@
 export default function Index() {
-  const routes = ["/", "/ask", "/counter", "/pikachu", "/dog"];
+  const routes = ["/", "/ask", "/counter", "/pikachu", "/dog","/dragndrop"];
   return (
     <ul>
       {routes.map(
