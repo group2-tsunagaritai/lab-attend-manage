@@ -19,6 +19,7 @@ export default function Netsh() {
       ></input>
       <label>command</label>
       <input
+        readOnly
         type="text"
         className={"input"}
         value={`netsh interface portproxy add v4tov4 listenaddress=localhost listenport=${port} connectaddress=${ip} connectport=${port}`}
