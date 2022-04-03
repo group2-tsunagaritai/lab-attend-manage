@@ -1,22 +1,59 @@
 // 表示するページを決める所。
 // 全ページで表示されるコンポーネントもここに置く
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import "bulma/css/bulma.css";
-import Ask from "./pages/Ask";
-import Counter from "./pages/Counter";
-import Home from "./pages/Home";
-import Index from "./components/Index";
-import Pikachu from "./pages/Pikachu";
+import Ask from "./pages/sandbox/Ask";
+import Counter from "./pages/sandbox/Counter";
+import Home from "./pages/sandbox/Index";
+import Pikachu from "./pages/sandbox/Pikachu";
+import Dog from "./pages/sandbox/Dog";
+import DragNDrop from "./pages/sandbox/DragNDrop";
+import Users from "./pages/users/Index";
+import Layout from "./components/Layout";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import UserEdit from "./pages/users/Edit";
+import UserLog from "./pages/users/Log";
+import Laboratory from "./pages/laboratory/Index";
+import LaboratoryEdit from "./pages/laboratory/Edit";
+import LaboratoryNew from "./pages/laboratory/New";
+import ScheduleNew from "./pages/laboratory/schedule/New";
+import Schedule from "./pages/laboratory/schedule/Index";
+import Netsh from "./pages/sandbox/Netsh";
+import Top from "./pages/Top";
+
 function App() {
   return (
     <div className="App">
-      <Index />
       <BrowserRouter>
         <Routes>
-          <Route index element={<Home />} />
-          <Route path="/counter" element={<Counter />} />
-          <Route path="/ask" element={<Ask />} />
-          <Route path="/pikachu" element={<Pikachu />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Top />} />
+            <Route path="signin" element={<SignIn />} />
+            <Route path="signup" element={<SignUp />} />
+            <Route path="users" element={<Outlet />}>
+              <Route path=":userId" element={<Users />} />
+              <Route path=":userId/edit" element={<UserEdit />} />
+              <Route path=":userId/log" element={<UserLog />} />
+            </Route>
+            <Route path="laboratory" element={<Outlet />}>
+              <Route path=":labId" element={<Laboratory />} />
+              <Route path=":labId/edit" element={<LaboratoryEdit />} />
+              <Route path=":labId/new" element={<LaboratoryNew />} />
+              <Route path=":labId/schedule" element={<Outlet />}>
+                <Route index element={<Schedule />} />
+                <Route path="new" element={<ScheduleNew />} />
+              </Route>
+            </Route>
+          </Route>
+          <Route path="sandbox" element={<Home />}>
+            <Route path="counter" element={<Counter />} />
+            <Route path="ask" element={<Ask />} />
+            <Route path="pikachu" element={<Pikachu />} />
+            <Route path="dog" element={<Dog />} />
+            <Route path="dragndrop" element={<DragNDrop />} />
+            <Route path="netsh" element={<Netsh />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
