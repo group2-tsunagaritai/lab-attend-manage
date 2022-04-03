@@ -35,4 +35,3 @@ exports.petPetIdGET = function(petId) {
     }
   });
 }
-
