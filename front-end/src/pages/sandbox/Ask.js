@@ -1,7 +1,7 @@
 // Let's Ask再現ページ
 import { useState } from "react";
-import AskHeader from "../components/AskHeader";
-import QuestionModal from "../components/QuestionModal";
+import AskHeader from "../../components/AskHeader";
+import QuestionModal from "../../components/QuestionModal";
 export default function Ask() {
   const [questions, setQuestion] = useState([]); // 表示する質問と答えの一覧
   const [showModal, setShowModal] = useState(false); // モーダルを表示するかどうか
