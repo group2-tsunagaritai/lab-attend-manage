@@ -52,7 +52,7 @@ function App() {
             <Route path="pikachu" element={<Pikachu />} />
             <Route path="dog" element={<Dog />} />
             <Route path="dragndrop" element={<DragNDrop />} />
-            <Route path="" element={<Netsh />} />
+            <Route path="netsh" element={<Netsh />} />
           </Route>
         </Routes>
       </BrowserRouter>
