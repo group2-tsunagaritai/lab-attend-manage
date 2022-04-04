@@ -27,7 +27,7 @@ Node.js の開発環境を整えないと起動できない。
   - `node -v` でバージョンを確認できる
 
 - `package.json` があるディレクトリで`npm install`
-- `npm start` をすると`http://localhost:3000`でサイトが見られる
+- `npm run start` をすると`http://localhost:3000`でサイトが見られる
   - WSL との接続がうまくいっていないときアクセスできないことがある
   - `ip a show dev eth0` 出でてくるアドレスを`http://172.***.***.***:3000`とブラウザに直接入力すれば見れるかも
 
@@ -66,7 +66,7 @@ Node.js の開発環境を整えないと起動できない。
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
