@@ -1,0 +1,65 @@
+/* Bulmaじゃ手が届かない場合ここで書く */
+#question-form-close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  background: none;
+  border: none;
+  color: rgb(63, 135, 194);
+  cursor: pointer;
+}
+.relative {
+  position: relative;
+}
+
+.question-modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  height: fit-content;
+  width: 90%;
+}
+.question-modal form {
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+}
+
+.ask-table {
+  width: 100%;
+}
+.ask-table thead {
+  text-align: center;
+}
+
+.ask-header {
+  background: rgb(76, 211, 76);
+  padding: 1rem;
+}
+.ask-header h1 {
+  font-weight: heavy;
+  font-size: 3rem;
+  color: white;
+}
+.ask-header ul {
+  color: white;
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.ask-modal-button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.flex {
+  display: flex;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
