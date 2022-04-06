@@ -5,7 +5,7 @@ from dataclasses import field, fields
 from pyexpat import model
 from rest_framework import serializers
 
-from .models import User, tag, Laboratory, Schedule, Log
+from .models import User, tag, Labratory, Schedule, Log
 from drf_writable_nested.serializers import WritableNestedModelSerializer
 
 class UserSerializer(WritableNestedModelSerializer):
@@ -20,8 +20,8 @@ class TagSerializer(WritableNestedModelSerializer):
 
 class LabratorySerializer(WritableNestedModelSerializer):
     class Meta:
-        model = Laboratory
-        fields = ('labaratory_name', 'member')
+        model = Labratory
+        fields = ('labratory_name', 'member','field')
 
 class ScheduleSerializer(WritableNestedModelSerializer):
     class Meta:

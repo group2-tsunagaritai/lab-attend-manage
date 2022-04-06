@@ -5,7 +5,7 @@ from django.shortcuts import render
 import django_filters
 from rest_framework import viewsets, filters
 
-from .models import User, tag, Laboratory, Schedule, Log
+from .models import User, tag, Labratory, Schedule, Log
 from .serializer import UserSerializer, TagSerializer, LabratorySerializer, ScheduleSerializer, LogSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -18,7 +18,7 @@ class TagViewSet(viewsets.ModelViewSet):
     serializer_class = TagSerializer
 
 class LabratoryViewSet(viewsets.ModelViewSet):
-    queryset = Laboratory.objects.all()
+    queryset = Labratory.objects.all()
     serializer_class = LabratorySerializer
 
 class ScheduleViewSet(viewsets.ModelViewSet):
