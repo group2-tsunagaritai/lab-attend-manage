@@ -2,9 +2,9 @@ import { AuthContext } from "../utils/auth/Auth";
 import { useContext } from "react";
 
 export default function SignIn() {
-  const auth = useContext(AuthContext)
+  const auth = useContext(AuthContext);
   return (
-    <div style={{ marginTop: "2rem" }} class="container">
+    <>
       <h2 className="title">サインイン</h2>
       <form>
         <div className="field">
@@ -32,6 +32,6 @@ export default function SignIn() {
       <p>
         <a href="./password">パスワードを忘れた場合</a>
       </p>
-    </div>
+    </>
   );
 }

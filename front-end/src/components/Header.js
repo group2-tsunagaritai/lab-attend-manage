@@ -13,19 +13,22 @@ export default function Header() {
         {authed ? (
           <>
             <li>
-              <a href="./users">マイページ</a>
+              <a href={`/users/${auth.uid}`}>マイページ</a>
             </li>
             <li>
-              <a href="./laboratories">研究室</a>
+              <a href="/laboratories">研究室</a>
+            </li>
+            <li>
+              <a href={`/users/${auth.uid}/log`}>在室記録</a>
             </li>
           </>
         ) : (
           <>
             <li>
-              <a href="./signin">SignIn</a>
+              <a href="/signin">SignIn</a>
             </li>
             <li>
-              <a href="./signup">SignUp</a>
+              <a href="/signup">SignUp</a>
             </li>
           </>
         )}

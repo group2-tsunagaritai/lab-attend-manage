@@ -47,7 +47,9 @@ export default function Layout() {
         </ul>
       </div>
       <Header />
-      <Outlet />
+      <div className="container" style={{ marginTop: "2rem" }}>
+        <Outlet />
+      </div>
     </div>
   );
 }

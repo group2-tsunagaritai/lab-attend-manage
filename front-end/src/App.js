@@ -26,7 +26,7 @@ import { AuthContext } from "./utils/auth/Auth";
 function App() {
   return (
     <div className="App">
-      <AuthContext.Provider value={{ sid: "test", uid: "test", lid: "" }}>
+      <AuthContext.Provider value={{ sid: "test", uid: "test", lid: [""] }}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -38,10 +38,11 @@ function App() {
                 <Route path=":userId/edit" element={<UserEdit />} />
                 <Route path=":userId/log" element={<UserLog />} />
               </Route>
-              <Route path="laboratory" element={<Outlet />}>
+              <Route path="laboratories" element={<Outlet />}>
+                <Route index element={<Laboratory />} />
                 <Route path=":labId" element={<Laboratory />} />
                 <Route path=":labId/edit" element={<LaboratoryEdit />} />
-                <Route path=":labId/new" element={<LaboratoryNew />} />
+                <Route path="new" element={<LaboratoryNew />} />
                 <Route path=":labId/schedule" element={<Outlet />}>
                   <Route index element={<Schedule />} />
                   <Route path="new" element={<ScheduleNew />} />
