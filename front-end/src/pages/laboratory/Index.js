@@ -1,9 +1,10 @@
 import { AuthContext } from "../../utils/auth/Auth";
 import { useContext } from "react";
 import LaboratoryCard from "../../components/LaboratoryCard";
+
 export default function Laboratory() {
-  const auth = useContext(AuthContext);
-  if (auth.sid === "")
+  const { authData, setAuthData } = useContext(AuthContext);
+  if (authData.jwt === "")
     return (
       <div>
         <a href="signin">ログイン</a>してください
@@ -17,7 +18,7 @@ export default function Laboratory() {
           <button className="button">研究室を作成する</button>
         </a>
       </div>
-      {auth.lid.map((e) => (
+      {authData.lid.map((e) => (
         <LaboratoryCard key={e} lid={e} />
       ))}
     </div>
