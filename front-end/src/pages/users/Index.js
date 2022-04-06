@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 export default function Users() {
   const auth = useContext(AuthContext);
   const location = useLocation();
-  if (location.pathname.split("/")[2] == auth.uid)
+  if (location.pathname.split("/")[2] === auth.uid)
     return (
       <div>
         <h2 className="title">ユーザ情報</h2>

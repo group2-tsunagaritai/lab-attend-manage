@@ -21,6 +21,13 @@ export default function Header() {
             <li>
               <a href={`/users/${auth.uid}/log`}>在室記録</a>
             </li>
+            {/* TODO あとで消す */}
+            <li>
+              <a href="/signin">SignIn</a>
+            </li>
+            <li>
+              <a href="/signup">SignUp</a>
+            </li>
           </>
         ) : (
           <>

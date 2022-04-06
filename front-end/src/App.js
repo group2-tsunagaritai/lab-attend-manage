@@ -22,11 +22,12 @@ import Schedule from "./pages/laboratory/schedule/Index";
 import Netsh from "./pages/sandbox/Netsh";
 import Top from "./pages/Top";
 import { AuthContext } from "./utils/auth/Auth";
+import Detail from "./pages/laboratory/Detail";
 
 function App() {
   return (
     <div className="App">
-      <AuthContext.Provider value={{ sid: "test", uid: "test", lid: [""] }}>
+      <AuthContext.Provider value={{ sid: "test", uid: "test", lid: ["1234"] }}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -40,7 +41,7 @@ function App() {
               </Route>
               <Route path="laboratories" element={<Outlet />}>
                 <Route index element={<Laboratory />} />
-                <Route path=":labId" element={<Laboratory />} />
+                <Route path=":labId" element={<Detail />} />
                 <Route path=":labId/edit" element={<LaboratoryEdit />} />
                 <Route path="new" element={<LaboratoryNew />} />
                 <Route path=":labId/schedule" element={<Outlet />}>

@@ -1,5 +1,5 @@
 import { AuthContext } from "../../utils/auth/Auth";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import LaboratoryCard from "../../components/LaboratoryCard";
 export default function Laboratory() {
   const auth = useContext(AuthContext);
