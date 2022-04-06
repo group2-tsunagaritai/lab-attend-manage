@@ -13,7 +13,7 @@ export default function SignIn() {
             <input
               className="input"
               type="email"
-              placeholder="@shibaura-it.ac.jp"
+              placeholder="example@shibaura-it.ac.jp"
             ></input>
           </div>
         </div>
@@ -23,7 +23,7 @@ export default function SignIn() {
             <input
               className="input"
               type="password"
-              placeholder="@shibaura-it.ac.jp"
+              placeholder=""
             ></input>
           </div>
         </div>
