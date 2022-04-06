@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const AuthContext = createContext({ sid: "", uid: "", lid: "" });
+export const AuthContext = createContext({ jwt: "", uid: "", lid: "" });

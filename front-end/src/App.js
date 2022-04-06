@@ -1,5 +1,6 @@
 // 表示するページを決める所。
 // 全ページで表示されるコンポーネントもここに置く
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import "bulma/css/bulma.css";
 import Ask from "./pages/sandbox/Ask";
@@ -25,9 +26,21 @@ import { AuthContext } from "./utils/auth/Auth";
 import Detail from "./pages/laboratory/Detail";
 
 function App() {
+  const [authData, setAuthData] = useState({jwt:'',uid:''});
+
+  useEffect(()=>{
+    // localStorageに認証情報がある場合はContextProviderに渡す
+    if(authData.jwt==""){
+      const tmp = localStorage.getItem('authData')
+      if(tmp){
+        setAuthData(JSON.parse(tmp))
+      }
+    }
+  },[])
+
   return (
     <div className="App">
-      <AuthContext.Provider value={{ sid: "test", uid: "test", lid: ["1234"] }}>
+      <AuthContext.Provider value={{ authData: authData, setAuthData: setAuthData }}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
