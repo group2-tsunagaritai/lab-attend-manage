@@ -1,9 +1,9 @@
 import { AuthContext } from "../utils/auth/Auth";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 export default function Header() {
-  const auth = useContext(AuthContext);
-  console.log(auth);
-  const authed = auth.sid !== "";
+  const { authData, setAuthData } = useContext(AuthContext);
+  console.log("authData", authData);
+  const authed = authData.jwt !== "";
   return (
     <div className="header">
       <h1>
@@ -13,20 +13,27 @@ export default function Header() {
         {authed ? (
           <>
             <li>
-              <a href={`/users/${auth.uid}`}>マイページ</a>
+              <a href={`/users/${authData.uid}`}>マイページ</a>
             </li>
             <li>
               <a href="/laboratories">研究室</a>
             </li>
             <li>
-              <a href={`/users/${auth.uid}/log`}>在室記録</a>
-            </li>
-            {/* TODO あとで消す */}
-            <li>
-              <a href="/signin">SignIn</a>
+              <a href={`/users/${authData.uid}/log`}>在室記録</a>
             </li>
             <li>
-              <a href="/signup">SignUp</a>
+              <p
+                onClick={() => {
+                  console.log("signout event");
+                  localStorage.setItem(
+                    "authData",
+                    JSON.stringify({ jwt: "", uid: "", lid: "" })
+                  );
+                  setAuthData({ jwt: "", uid: "", lid: "" });
+                }}
+              >
+                SignOut
+              </p>
             </li>
           </>
         ) : (
