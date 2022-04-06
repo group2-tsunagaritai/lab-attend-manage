@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from .models import User, tag, Laboratory, Schedule, Log
+from .models import User, tag, Labratory, Schedule, Log
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
@@ -13,7 +13,7 @@ class UserAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(Laboratory)
+@admin.register(Labratory)
 class LaboratoryAdmin(admin.ModelAdmin):
     pass
 

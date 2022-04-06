@@ -29,20 +29,27 @@ class User(models.Model):
         return "{}:{}".format(self.pk,self.name)
     __str__ = __repr__
 
-class Laboratory(models.Model):
-    laboratory_name = models.CharField(max_length=32)
+class Labratory(models.Model):
+    labratory_name = models.CharField(max_length=32)
     member = models.ManyToManyField(User,verbose_name='所属メンバー')
-    
-
+    STATUS_LABRATORY = "0"
+    STATUS_ADMINISTRAROR = "1"
+    STATUS_MEMBER = "2"
+    STATUS_SET = (
+            (STATUS_LABRATORY,"---"),
+            (STATUS_ADMINISTRAROR, "管理者"),
+            (STATUS_MEMBER, "メンバー"),
+    )
+    field = models.CharField(choices=STATUS_SET,default=STATUS_LABRATORY,max_length=8)
     def __repr__(self):
-        return "{}:{}".format(self.pk,self.laboratory_name)
+        return "{}:{}".format(self.pk,self.labratory_name)
     __str__ = __repr__
 
 class Schedule(models.Model):
     enter = models.DateTimeField(auto_created=True)
     exit = models.DateTimeField(auto_created=True)
     userid = models.ManyToManyField(User,verbose_name='ユーザID')
-    labid = models.ManyToManyField(Laboratory,verbose_name='研究室ID')
+    labid = models.ManyToManyField(Labratory,verbose_name='研究室ID')
 
     def __repr__(self):
         return "{}".format(self.pk)
@@ -50,6 +57,10 @@ class Schedule(models.Model):
 
 class Log(models.Model):
     user = models.ForeignKey(User,related_name='users',on_delete=models.CASCADE)
-    lab = models.ForeignKey(Laboratory,related_name='labratory',on_delete=models.CASCADE)
+    lab = models.ForeignKey(Labratory,related_name='labratory',on_delete=models.CASCADE)
     enter = models.DateTimeField(auto_created=True)
     exit = models.DateTimeField(auto_created=True)
+
+    def __repr__(self):
+        return "{}".format(self.pk)
+    __str__ = __repr__
