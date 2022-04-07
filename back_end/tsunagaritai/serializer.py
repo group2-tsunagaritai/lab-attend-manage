@@ -16,7 +16,7 @@ class UserSerializer(WritableNestedModelSerializer):
 class TagSerializer(WritableNestedModelSerializer):
     class Meta:
         model = tag
-        fields = ('tag_id')
+        fields = ('tag_id',)
 
 class LabratorySerializer(WritableNestedModelSerializer):
     class Meta:
