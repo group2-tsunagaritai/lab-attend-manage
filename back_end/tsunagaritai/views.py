@@ -11,6 +11,7 @@ from .serializer import UserSerializer, TagSerializer, LabratorySerializer, Sche
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    filter_fields = ('labratory',)
 
 
 class TagViewSet(viewsets.ModelViewSet):
@@ -24,7 +25,9 @@ class LabratoryViewSet(viewsets.ModelViewSet):
 class ScheduleViewSet(viewsets.ModelViewSet):
     queryset = Schedule.objects.all()
     serializer_class = ScheduleSerializer
+    filter_fields = ('userid','labid')
 
 class LogViewSet(viewsets.ModelViewSet):
     queryset = Log.objects.all()
     serializer_class = LogSerializer
+    filter_fields = ('user','lab')
