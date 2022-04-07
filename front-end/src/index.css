@@ -72,20 +72,20 @@
   cursor: pointer;
 }
 
-.w-full{ 
-  width:100%;
+.w-full {
+  width: 100%;
 }
 
-.align-center{
+.align-center {
   align-items: center;
 }
 
-.fit-content{
-  width: fit-content
+.fit-content {
+  width: fit-content;
 }
 
 .flex-column {
-  flex-flow:column;
+  flex-flow: column;
 }
 
 .header {
@@ -137,5 +137,11 @@
 }
 
 .schedule-form {
-  border-bottom:0.125rem rgb(215, 215, 221) solid;
+  border-bottom: 0.125rem rgb(215, 215, 221) solid;
+}
+
+.attend-panel {
+  width: 1.5rem;
+  height: 1.5rem;
+  background: green;
 }

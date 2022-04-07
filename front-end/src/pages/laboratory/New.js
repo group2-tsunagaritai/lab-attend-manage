@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../utils/auth/Auth";
 export default function New() {
   const [laboratoryName, setLaboratoryName] = useState("");
-  const submit = async (e) => {
+  const { authData } = useContext(AuthContext);
+  console.log(authData);
+  const submit = (e) => {
     e.preventDefault();
-    console.log(laboratoryName)
-  }
+    console.log(laboratoryName);
+    const formdata = new FormData();
+    formdata.append("labratory_name", laboratoryName);
+    formdata.append("member", authData.uid);
+    console.log(formdata);
+    fetch(`http://localhost:8000/api/labratory/`, {
+      method: "POST",
+      body: formdata,
+    }).then((e)=>{window.location.href='/laboratories'}).catch((err) => console.log(err));
+  };
   return (
     <div>
-      <h2 className="title">研究室作成</h2>
-      <h3>入力</h3>
+      <h2 className="title is-3">研究室作成</h2>
+      <h3 className="title is-4">入力</h3>
       <form>
         <div className="field">
           <label className="label">研究室名</label>
@@ -22,7 +33,9 @@ export default function New() {
             ></input>
           </div>
         </div>
-        <button onClick={submit} className="button is-primary">作成</button>
+        <button onClick={submit} className="button is-primary">
+          作成
+        </button>
       </form>
     </div>
   );
