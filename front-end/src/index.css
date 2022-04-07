@@ -60,6 +60,91 @@
   display: flex;
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
 .gap-4 {
   gap: 1rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.fit-content {
+  width: fit-content;
+}
+
+.flex-column {
+  flex-flow: column;
+}
+
+.header {
+  background: rgb(115, 150, 207);
+  padding: 1rem;
+  color: white;
+}
+
+.header h1 {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.header ul {
+  display: flex;
+  gap: 1rem;
+}
+
+.header a {
+  color: white;
+}
+
+.header p:hover {
+  color: black;
+}
+
+.lab-header {
+  margin-bottom: 2rem;
+  text-align: right;
+}
+
+.lab-space {
+  height: min(80vw, 80vh);
+  width: min(80vw, 80vh);
+  background: whitesmoke;
+  position: relative;
+}
+
+.lab-avatar {
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  background: rgb(55, 55, 55);
+  line-height: 64px;
+  text-align: center;
+  color: white;
+  border-radius: 50%;
+}
+
+.layout-container {
+  margin: 2rem;
+}
+
+.schedule-form {
+  border-bottom: 0.125rem rgb(215, 215, 221) solid;
+}
+
+.attend-panel {
+  width: 1.5rem;
+  height: 1.5rem;
+  background: green;
 }
