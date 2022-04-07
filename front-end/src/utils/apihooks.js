@@ -27,6 +27,19 @@ export function useLaboratory(id) {
   return laboratory;
 }
 
+export function useUsers(lid) {
+  const [users, setUsers] = useState([]);
+  const fetchData = () => {
+    fetch(`http://localhost:8000/api/users?laboratory=${lid}/`).then((res) => {
+      res.json().then((data) => {
+        setUsers(data);
+      });
+    });
+  };
+  useEffect(() => fetchData(), [setUsers]);
+  return users;
+}
+
 export function usePollingMembers(lid) {
   const [members, setMembers] = useState();
   const fetchMembers = () => {
@@ -49,14 +62,31 @@ export function usePollingMembers(lid) {
   return members;
 }
 
-export function usePollLaboratory(id) {
-  const [laboratory, setLaboratory] = useState();
-
+export const useLabSchedules = (lid) => {
+  const [schedules, setSchedules] = useState([]);
   useEffect(() => {
-    const interval = setInterval(() => {}, 2000);
-    return () => {
-      clearInterval(interval);
-    };
-  });
-  return laboratory;
-}
+    fetch(
+      `http://localhost:8000/api/Schedule/?${new URLSearchParams({
+        Labid: lid,
+      })}`
+    ).then((res) => {
+      res.json().then((data) => {
+        setSchedules(data);
+      });
+    });
+  }, [setSchedules]);
+  return schedules;
+};
+
+export const useSchedules = (uid, lid) => {
+  const [schedules, setSchedules] = useState([]);
+  useEffect(() => {
+    fetch(
+      `http://localhost:8000/api/Schedule/?${new URLSearchParams({
+        Labid: lid,
+        Userid: uid,
+      })}`
+    ).then((res) => res.json().then((data) => setSchedules(data)));
+  }, [setSchedules]);
+  return schedules;
+};
