@@ -1,20 +1,14 @@
 import { AuthContext } from "../../utils/auth/Auth";
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useUser } from "../../utils/apihooks";
 
 export default function Users() {
   const { authData } = useContext(AuthContext);
-  const [user, setUser] = useState();
   const location = useLocation();
   const uid = location.pathname.split("/")[2];
+  const user = useUser(uid);
   console.log(authData.uid, uid);
-  useEffect(() => {
-    fetch(`http://localhost:8000/api/users/${uid}/`).then((res) => {
-      res.json().then((data) => {
-        setUser(data);
-      });
-    });
-  }, [setUser]);
   if (!user) return <></>;
   else if (location.pathname.split("/")[2] === authData.uid)
     return (
