@@ -1,11 +1,45 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
-import { usePollLaboratory } from "../../utils/apihooks";
+import {
+  useLaboratory,
+  usePollingMembers,
+  useUser,
+} from "../../utils/apihooks";
+import { AuthContext } from "../../utils/auth/Auth";
 
-function Avatar(props) {
+function Avatar({ spacewidth, member }) {
+  const pos = { x: member.x, y: member.y };
+  return (
+    <>
+      <div
+        className="lab-avatar"
+        style={{
+          pointerEvents: "none",
+          top: `${(pos.y * spacewidth) / 100}px`,
+          left: `${(pos.x * spacewidth) / 100}px`,
+        }}
+      >
+        {member.name}
+      </div>
+    </>
+  );
+}
+
+function DraggableAvatar({ spacewidth, member, uid }) {
   const [start, setStart] = useState({ x: 0, y: 0 });
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  const laboratory = usePollLaboratory(3);
+  const [pos, setPos] = useState({ x: member.x, y: member.y });
+  console.log("shoki", pos, spacewidth);
+  useEffect(() => {
+    const formdata = new FormData();
+    console.log(pos);
+    formdata.append("x", pos.x);
+    formdata.append("y", pos.y);
+    if (isFinite(pos.x) && isFinite(pos.y))
+      fetch(`http://localhost:8000/api/users/${uid}/`, {
+        method: "PATCH",
+        body: formdata,
+      });
+  }, [pos]);
   return (
     <>
       <div
@@ -14,22 +48,22 @@ function Avatar(props) {
         }}
         onDragEnd={(e) => {
           console.log(
-            (100 * (e.clientX - start.x)) / props.spacewidth,
-            (100 * (e.clientY - start.y)) / props.spacewidth
+            (100 * (e.clientX - start.x)) / spacewidth,
+            (100 * (e.clientY - start.y)) / spacewidth
           );
           setPos({
-            x: pos.x + (100 * (e.clientX - start.x)) / props.spacewidth,
-            y: pos.y + (100 * (e.clientY - start.y)) / props.spacewidth,
+            x: Math.round(pos.x + (100 * (e.clientX - start.x)) / spacewidth),
+            y: Math.round(pos.y + (100 * (e.clientY - start.y)) / spacewidth),
           });
         }}
         draggable
         className="lab-avatar"
         style={{
-          top: `${(pos.y * props.spacewidth) / 100}px`,
-          left: `${(pos.x * props.spacewidth) / 100}px`,
+          top: `${(pos.y * spacewidth) / 100}px`,
+          left: `${(pos.x * spacewidth) / 100}px`,
         }}
       >
-        <img />
+        {member.name}
       </div>
     </>
   );
@@ -43,15 +77,23 @@ function Space(props) {
   );
 }
 
-function SpaceWrapper(props) {
+function SpaceWrapper({ members }) {
   const [width, setWidth] = useState(0);
   const space = useRef();
+  const { authData } = useContext(AuthContext);
+  const user = useUser(authData.uid);
+  console.log(authData.uid);
   useEffect(() => {
     if (space.current) setWidth(space.current.clientWidth);
-  }, [space]);
+  }, [space.current]);
+  if (!user) return <></>;
   return (
     <Space refrelay={space}>
-      <Avatar spacewidth={width} />
+      {members.map((member, index) => {
+        console.log(member);
+        return <Avatar key={index} spacewidth={width} member={member} />;
+      })}
+      <DraggableAvatar member={user} spacewidth={width} uid={authData.uid} />
     </Space>
   );
 }
@@ -59,10 +101,12 @@ function SpaceWrapper(props) {
 export default function Detail() {
   const location = useLocation();
   const lid = location.pathname.split("/")[2];
-
+  const laboratory = useLaboratory(lid);
+  const members = usePollingMembers(lid);
+  if (!(laboratory && members)) return <></>;
   return (
     <div>
-      <h2 className="title">研究室状況</h2>
+      <h2 className="title">{laboratory["labratory_name"]}</h2>
       <button className="button is-primary">出席</button>
       <a href={`/laboratories/${lid}/edit`}>
         <button className="button">管理</button>
@@ -73,7 +117,7 @@ export default function Detail() {
       <a href={`/laboratories/${lid}/schedule/new`}>
         <button className="button">スケジュール登録</button>
       </a>
-      <SpaceWrapper />
+      <SpaceWrapper members={members} />
     </div>
   );
 }
