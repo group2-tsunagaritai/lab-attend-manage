@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <div className="header">
       <h1>
-        <a href="/">研究室出席モニタ（仮）</a>
+        <a href="/">Rooms</a>
       </h1>
       <ul>
         {authed ? (
@@ -23,6 +23,7 @@ export default function Header() {
             </li>
             <li>
               <p
+                className="cursor-pointer"
                 onClick={() => {
                   console.log("signout event");
                   localStorage.setItem(
