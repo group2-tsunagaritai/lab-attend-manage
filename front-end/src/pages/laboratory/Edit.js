@@ -2,15 +2,26 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useUsers } from "../../utils/apihooks";
 
-function UserCard() {
+function UserCard({ user }) {
   return (
     <div className="box">
       <div className="flex gap-4 space-between w-full">
         <div className="flex gap-4 align-center">
-          <p>名前</p>
-          <p>id</p>
+          <p>{user.name}</p>
         </div>
-        <button className="button">削除</button>
+        {/* <button
+          className="button"
+          onClick={() => {
+            const formdata = new FormData();
+            formdata.append("labratory", -1);
+            fetch(`http://localhost:8000/api/users/${user.id}/`, {
+              method: "PATCH",
+              body: formdata,
+            });
+          }}
+        >
+          削除
+        </button> */}
       </div>
     </div>
   );
@@ -20,7 +31,7 @@ export default function Edit() {
   const lid = location.pathname.split("/")[2];
   const [newid, setNewId] = useState("");
   const users = useUsers(lid);
-  console.log(lid)
+  console.log(lid);
   console.log("users", users);
 
   return (
@@ -52,7 +63,7 @@ export default function Edit() {
           </button>
         </div>
         {users.map((user, key) => (
-          <UserCard key={key} />
+          <UserCard key={key} user={user} />
         ))}
       </div>
     </div>

@@ -14,12 +14,12 @@ function Avatar({ spacewidth, member }) {
       <div
         className="lab-avatar"
         style={{
-          pointerEvents: "none",
           top: `${(pos.y * spacewidth) / 100}px`,
           left: `${(pos.x * spacewidth) / 100}px`,
         }}
       >
-        {member.name}
+        <a href={`/users/${member.id}`}>
+        {member.name}</a>
       </div>
     </>
   );
@@ -71,6 +71,8 @@ function DraggableAvatar({ spacewidth, member, uid }) {
         draggable
         className="lab-avatar"
         style={{
+          background: "whitesmoke",
+          color:"black",
           top: `${(pos.y * spacewidth) / 100}px`,
           left: `${(pos.x * spacewidth) / 100}px`,
         }}
@@ -89,12 +91,10 @@ function Space(props) {
   );
 }
 
-function SpaceWrapper({ members }) {
+function SpaceWrapper({ members, user, attend }) {
   const [width, setWidth] = useState(0);
   const space = useRef();
-  const { authData } = useContext(AuthContext);
-  const user = useUser(authData.uid);
-  console.log(authData.uid);
+
   useEffect(() => {
     console.log("space.current");
     if (space.current)
@@ -103,11 +103,17 @@ function SpaceWrapper({ members }) {
   if (!user) return <></>;
   return (
     <Space refrelay={space}>
-      {members.map((member, index) => {
-        console.log(member);
-        return <Avatar key={index} spacewidth={width} member={member} />;
-      })}
-      <DraggableAvatar member={user} spacewidth={width} uid={authData.uid} />
+      {members
+        .filter((member) => member.attend && member.id !== user.id)
+        .map((member, index) => {
+          console.log(member);
+          return <Avatar key={index} spacewidth={width} member={member} />;
+        })}
+      {attend ? (
+        <DraggableAvatar member={user} spacewidth={width} uid={user.id} />
+      ) : (
+        <></>
+      )}
     </Space>
   );
 }
@@ -117,21 +123,64 @@ export default function Detail() {
   const lid = location.pathname.split("/")[2];
   const laboratory = useLaboratory(lid);
   const members = usePollingMembers(lid);
+  const { authData } = useContext(AuthContext);
+
+  const user = useUser(authData.uid);
+  console.log("authData", authData, user);
+  const [userAttend, setUserAttend] = useState(false);
+  useEffect(() => {
+    if (user) setUserAttend(user.attend);
+  }, [user]);
+  const changeAttend = (next) => {
+    const formdata = new FormData();
+    formdata.append("attend", next);
+    fetch(`http://localhost:8000/api/users/${authData.uid}/`, {
+      method: "PATCH",
+      body: formdata,
+    }).then(() => {});
+  };
+
   if (!(laboratory && members)) return <></>;
   return (
     <div>
       <h2 className="title">{laboratory["labratory_name"]}</h2>
-      <button className="button is-primary">出席</button>
-      <a href={`/laboratories/${lid}/edit`}>
-        <button className="button">管理</button>
-      </a>
-      <a href={`/laboratories/${lid}/schedule`}>
-        <button className="button">スケジュール確認</button>
-      </a>
-      <a href={`/laboratories/${lid}/schedule/new`}>
-        <button className="button">スケジュール登録</button>
-      </a>
-      <SpaceWrapper members={members} />
+      <div className="flex gap-4" style={{ marginBottom: "1rem" }}>
+        {userAttend ? (
+          <button
+            className="button is-primary"
+            onClick={() => {
+              changeAttend(false);
+              setUserAttend(false);
+            }}
+          >
+            退席
+          </button>
+        ) : (
+          <button
+            className="button is-primary"
+            onClick={() => {
+              changeAttend(true);
+              setUserAttend(true);
+            }}
+          >
+            出席
+          </button>
+        )}
+        <a href={`/laboratories/${lid}/edit`}>
+          <button className="button">管理</button>
+        </a>
+        <a href={`/laboratories/${lid}/schedule`}>
+          <button className="button">
+            スケジュール確認
+          </button>
+        </a>
+        <a href={`/laboratories/${lid}/schedule/new`}>
+          <button className="button">
+            スケジュール登録
+          </button>
+        </a>
+      </div>
+      <SpaceWrapper members={members} user={user} attend={userAttend} />
     </div>
   );
 }
