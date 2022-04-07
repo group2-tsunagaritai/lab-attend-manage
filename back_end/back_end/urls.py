@@ -16,8 +16,10 @@ Including another URLconf
 from django.urls import path,include
 from django.contrib import admin
 from tsunagaritai.urls import router as tsunagaritai_router
+from rest_framework_jwt.views import obtain_jwt_token # JWT認証のために追加
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include(tsunagaritai_router.urls)),
+    path('api-auth/', obtain_jwt_token), # 認証のためのURL
 ]
