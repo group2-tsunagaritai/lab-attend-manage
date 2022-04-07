@@ -12,3 +12,22 @@ export function useUser(id) {
   return user
 }
 
+export function usePollLaboratory (id) {
+  const [laboratory, setLaboratory] = useState();
+  useEffect(`http://localhost:8000/api/laboraotry/${id}/`).then((res)=>{
+    res.json().then((data)=>{
+      setLaboratory(data);
+    })
+  })
+  return laboratory
+}
+
+export function useLaboratories (ids) {
+  const [laboratory, setLaboratory] = useState();
+  useEffect(``).then((res)=>{
+    res.json().then((data)=>{
+      setLaboratory(data);
+    })
+  })
+  return laboratory
+}

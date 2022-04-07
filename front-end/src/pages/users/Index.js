@@ -1,5 +1,5 @@
 import { AuthContext } from "../../utils/auth/Auth";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { useUser } from "../../utils/apihooks";
 

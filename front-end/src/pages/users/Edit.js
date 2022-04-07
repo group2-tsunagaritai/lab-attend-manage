@@ -1,10 +1,8 @@
-import { useEffect, useState, useContext, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useUser } from "../../utils/apihooks";
-import { AuthContext } from "../../utils/auth/Auth";
 
 export default function Edit() {
-  const { authData } = useContext(AuthContext);
   const location = useLocation();
   const uid = location.pathname.split("/")[2];
   const user = useUser(uid);
@@ -18,11 +16,6 @@ export default function Edit() {
   const submit = (e) => {
     e.preventDefault();
     if (emailRef.current && usernameRef.current && fieldRef.current) {
-      const edited = {
-        mail: emailRef.current.value,
-        name: usernameRef.current.value,
-        field: fieldRef.current.value,
-      };
       const formdata = new FormData();
       formdata.append('mail',emailRef.current.value)
       formdata.append('name',usernameRef.current.value)
