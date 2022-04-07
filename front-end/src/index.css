@@ -72,6 +72,22 @@
   cursor: pointer;
 }
 
+.w-full{ 
+  width:100%;
+}
+
+.align-center{
+  align-items: center;
+}
+
+.fit-content{
+  width: fit-content
+}
+
+.flex-column {
+  flex-flow:column;
+}
+
 .header {
   background: rgb(115, 150, 207);
   padding: 1rem;
@@ -93,7 +109,7 @@
 }
 
 .header p:hover {
-  color:black;
+  color: black;
 }
 
 .lab-header {
@@ -118,4 +134,8 @@
 
 .layout-container {
   margin: 2rem;
+}
+
+.schedule-form {
+  border-bottom:0.125rem rgb(215, 215, 221) solid;
 }
