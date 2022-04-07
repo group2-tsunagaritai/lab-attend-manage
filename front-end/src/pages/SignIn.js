@@ -10,7 +10,7 @@ export default function SignIn() {
     console.log('sign in')
     await localStorage.setItem(
       "authData",
-      JSON.stringify({ jwt: "jwt", uid: "tt", lid: [] })
+      JSON.stringify({ jwt: "jwt", uid: "tt", lid: ['cdlab'] })
     );
     window.location.href = "/laboratories"
     return;
