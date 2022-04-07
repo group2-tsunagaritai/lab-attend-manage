@@ -2,13 +2,17 @@ import { useEffect, useState } from "react";
 
 export function useUser(id) {
   const [user, setUser] = useState();
+
   useEffect(() => {
+    if(!id){
+      return;
+    }
     fetch(`http://localhost:8000/api/users/${id}/`).then((res) => {
       res.json().then((data) => {
         setUser(data);
       });
     });
-  }, [setUser]);
+  }, [setUser, id]);
   return user;
 }
 
