@@ -4,15 +4,15 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 import django_filters
 from rest_framework import viewsets, filters
-
+from rest_framework.permissions import AllowAny
 from .models import User, tag, Labratory, Schedule, Log
 from .serializer import UserSerializer, TagSerializer, LabratorySerializer, ScheduleSerializer, LogSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
+    permission_classes = [AllowAny]
     serializer_class = UserSerializer
     filter_fields = ('labratory',)
-
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = tag.objects.all()
@@ -20,6 +20,7 @@ class TagViewSet(viewsets.ModelViewSet):
 
 class LabratoryViewSet(viewsets.ModelViewSet):
     queryset = Labratory.objects.all()
+    permission_classes = [AllowAny]
     serializer_class = LabratorySerializer
 
 class ScheduleViewSet(viewsets.ModelViewSet):
