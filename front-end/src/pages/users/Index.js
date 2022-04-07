@@ -2,6 +2,7 @@ import { AuthContext } from "../../utils/auth/Auth";
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { useUser } from "../../utils/apihooks";
+import { tags } from '../../utils/url'
 
 export default function Users() {
   const { authData } = useContext(AuthContext);
@@ -30,7 +31,7 @@ export default function Users() {
             </tr>
             <tr>
               <th>分野</th>
-              <td>{user.field}</td>
+              <td>{tags[user.field]}</td>
             </tr>
           </tbody>
         </table>
@@ -59,7 +60,7 @@ export default function Users() {
             </tr>
             <tr>
               <th>分野</th>
-              <td>{user.field}</td>
+              <td>{tags[user.field]}</td>
             </tr>
           </tbody>
         </table>
