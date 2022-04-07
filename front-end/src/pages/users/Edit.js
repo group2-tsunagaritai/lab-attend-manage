@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useUser } from "../../utils/apihooks";
+import { tags } from "../../utils/url"
 
 export default function Edit() {
   const location = useLocation();
@@ -52,12 +53,11 @@ export default function Edit() {
           </div>
           <div className="control">
             <label className="label">分野</label>
-            <input
-              ref={fieldRef}
-              className="input"
-              type="text"
-              defaultValue={user.field}
-            ></input>
+            <select className="input" defaultValue={user.field} ref={fieldRef}>
+              {[0,1,2,3,4].map((num)=>{
+                return <option value={num}>{tags[num]}</option>
+              })}
+            </select>
           </div>
         </div>
         <button className="button is-primary" onClick={submit}>
