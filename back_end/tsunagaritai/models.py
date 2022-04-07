@@ -25,13 +25,6 @@ class User(models.Model):
     field = models.CharField(choices=tag.STATUS_SET, default=tag.STATUS_TAG,max_length=8)
     x = models.FloatField()
     y = models.FloatField()
-    def __repr__(self):
-        return "{}:{}".format(self.pk,self.name)
-    __str__ = __repr__
-
-class Labratory(models.Model):
-    labratory_name = models.CharField(max_length=32)
-    member = models.ManyToManyField(User,verbose_name='所属メンバー')
     STATUS_LABRATORY = "0"
     STATUS_ADMINISTRAROR = "1"
     STATUS_MEMBER = "2"
@@ -40,7 +33,14 @@ class Labratory(models.Model):
             (STATUS_ADMINISTRAROR, "管理者"),
             (STATUS_MEMBER, "メンバー"),
     )
-    field = models.CharField(choices=STATUS_SET,default=STATUS_LABRATORY,max_length=8)
+    field2 = models.CharField(choices=STATUS_SET,default=STATUS_LABRATORY,max_length=8)
+    def __repr__(self):
+        return "{}:{}".format(self.pk,self.name)
+    __str__ = __repr__
+
+class Labratory(models.Model):
+    labratory_name = models.CharField(max_length=32)
+    member = models.ManyToManyField(User,verbose_name='所属メンバー')
     def __repr__(self):
         return "{}:{}".format(self.pk,self.labratory_name)
     __str__ = __repr__
