@@ -1,9 +1,11 @@
 import { useRef, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { usePollLaboratory } from "../../utils/apihooks";
 
 function Avatar(props) {
   const [start, setStart] = useState({ x: 0, y: 0 });
   const [pos, setPos] = useState({ x: 0, y: 0 });
+  const laboratory = usePollLaboratory(3);
   return (
     <>
       <div
