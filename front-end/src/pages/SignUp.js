@@ -13,10 +13,16 @@ export default function SignUn() {
   const validate = () => {
     return true;
   };
-  const submit = ()=>{
-
-    setState('complete');
-  }
+  const submit = async () => {
+    const formdata = new FormData();
+    formdata.append("mail", email);
+    formdata.append("name", username);
+    formdata.append("x", 0);
+    formdata.append("y", 0);
+    formdata.append("labratory", 1);
+    await fetch(`http://localhost:8000/api/users/`, { method: "POST" ,body:formdata});
+    setState("complete");
+  };
 
   if (state === "input")
     return (
@@ -92,7 +98,14 @@ export default function SignUn() {
         <p>{email}</p>
         <label>ユーザ名</label>
         <p>{username}</p>
-        <button className="button is-primary" onClick={()=>submit()}>登録</button>
+        <button
+          className="button is-primary"
+          onClick={() => {
+            submit();
+          }}
+        >
+          登録
+        </button>
       </>
     );
   } else {
