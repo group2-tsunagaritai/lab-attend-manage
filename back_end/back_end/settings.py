@@ -44,6 +44,11 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "django_filters",
+    "rest_framework.authtoken",
+    "rest_auth",
+    "allauth",
+    "allauth.account",
+    "rest_auth.registration",
 ]
 
 MIDDLEWARE = [
@@ -128,7 +133,26 @@ USE_TZ = True
 STATIC_URL = "/static/"
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
+#####################
+REST_USE_JWT = True # new
+
+REST_SESSION_LOGIN = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SITE_ID = 1
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS':['django_filters.rest_framework.DjangoFilterBackend'],
+
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
 }
 

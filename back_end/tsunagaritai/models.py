@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from dataclasses import field
+from pyexpat import model
 from statistics import mode
 from telnetlib import STATUS
 from django.db import models
@@ -42,6 +43,7 @@ class User(models.Model):
     )
     status = models.CharField(choices=STATUS_SET,default=STATUS_LABRATORY,max_length=8)
     labratory = models.ForeignKey(Labratory,on_delete=models.CASCADE)
+    attend = models.BooleanField(default=True, help_text='出席ならTrue')
     def __repr__(self):
         return "{}:{}".format(self.pk,self.name)
     __str__ = __repr__
