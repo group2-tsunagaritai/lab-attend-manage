@@ -128,7 +128,10 @@
   width: 64px;
   height: 64px;
   position: absolute;
-  background: gray;
+  background: rgb(55, 55, 55);
+  line-height: 64px;
+  text-align: center;
+  color: white;
   border-radius: 50%;
 }
 

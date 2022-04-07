@@ -10,7 +10,7 @@ export default function Users() {
   const user = useUser(uid);
   console.log(authData.uid, uid);
   if (!user) return <></>;
-  else if (location.pathname.split("/")[2] === authData.uid)
+  else if (location.pathname.split("/")[2] === `${authData.uid}`)
     return (
       <div>
         <h2 className="title">ユーザ情報</h2>
