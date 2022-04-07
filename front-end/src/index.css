@@ -68,6 +68,10 @@
   gap: 1rem;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .header {
   background: rgb(115, 150, 207);
   padding: 1rem;
@@ -88,14 +92,18 @@
   color: white;
 }
 
+.header p:hover {
+  color:black;
+}
+
 .lab-header {
   margin-bottom: 2rem;
   text-align: right;
 }
 
 .lab-space {
-  height: 80vh;
-  width: 80vw;
+  height: min(80vw, 80vh);
+  width: min(80vw, 80vh);
   background: whitesmoke;
   position: relative;
 }
@@ -106,4 +114,8 @@
   position: absolute;
   background: gray;
   border-radius: 50%;
+}
+
+.layout-container {
+  margin: 2rem;
 }

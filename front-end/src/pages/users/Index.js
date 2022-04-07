@@ -3,9 +3,9 @@ import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function Users() {
-  const auth = useContext(AuthContext);
+  const { authData, setAuthData } = useContext(AuthContext);
   const location = useLocation();
-  if (location.pathname.split("/")[2] === auth.uid)
+  if (location.pathname.split("/")[2] === authData.uid)
     return (
       <div>
         <h2 className="title">ユーザ情報</h2>
@@ -26,7 +26,7 @@ export default function Users() {
             <h3>ユーザ名</h3>
             <p>{"aaaaaaaa"}</p>
           </div>
-          <a href={`./${auth.uid}/edit`}><button className="button">編集</button></a>
+          <a href={`./${authData.uid}/edit`}><button className="button">編集</button></a>
         </div>
       </div>
     );
