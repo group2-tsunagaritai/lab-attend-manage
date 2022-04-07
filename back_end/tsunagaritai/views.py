@@ -13,7 +13,6 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     filter_fields = ('labratory',)
 
-
 class TagViewSet(viewsets.ModelViewSet):
     queryset = tag.objects.all()
     serializer_class = TagSerializer
