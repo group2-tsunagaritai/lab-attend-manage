@@ -52,8 +52,20 @@ function DraggableAvatar({ spacewidth, member, uid }) {
             (100 * (e.clientY - start.y)) / spacewidth
           );
           setPos({
-            x: Math.round(pos.x + (100 * (e.clientX - start.x)) / spacewidth),
-            y: Math.round(pos.y + (100 * (e.clientY - start.y)) / spacewidth),
+            x: Math.max(
+              0,
+              Math.min(
+                100,
+                Math.round(pos.x + (100 * (e.clientX - start.x)) / spacewidth)
+              )
+            ),
+            y: Math.max(
+              0,
+              Math.min(
+                100,
+                Math.round(pos.y + (100 * (e.clientY - start.y)) / spacewidth)
+              )
+            ),
           });
         }}
         draggable
@@ -84,7 +96,9 @@ function SpaceWrapper({ members }) {
   const user = useUser(authData.uid);
   console.log(authData.uid);
   useEffect(() => {
-    if (space.current) setWidth(space.current.clientWidth);
+    console.log("space.current");
+    if (space.current)
+      setTimeout(() => setWidth(space.current.clientWidth), 100);
   }, [space.current]);
   if (!user) return <></>;
   return (
