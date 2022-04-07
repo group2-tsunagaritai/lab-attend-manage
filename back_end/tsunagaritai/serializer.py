@@ -11,7 +11,7 @@ from drf_writable_nested.serializers import WritableNestedModelSerializer
 class UserSerializer(WritableNestedModelSerializer):
     class Meta:
         model = User
-        fields = ('name', 'mail','field','field2')
+        fields = ('name', 'mail','field','status')
 
 class TagSerializer(WritableNestedModelSerializer):
     class Meta:
@@ -21,7 +21,7 @@ class TagSerializer(WritableNestedModelSerializer):
 class LabratorySerializer(WritableNestedModelSerializer):
     class Meta:
         model = Labratory
-        fields = ('labratory_name', 'member','field')
+        fields = ('labratory_name', 'member')
 
 class ScheduleSerializer(WritableNestedModelSerializer):
     class Meta:

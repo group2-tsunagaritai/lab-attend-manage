@@ -19,6 +19,13 @@ class tag(models.Model):
             (STATUS_WEB,"Web")
     )    
 
+class Labratory(models.Model):
+    labratory_name = models.CharField(max_length=32)
+    def __repr__(self):
+        return "{}:{}".format(self.pk,self.labratory_name)
+    __str__ = __repr__
+
+
 class User(models.Model):
     name = models.CharField(max_length=32)
     mail = models.EmailField()
@@ -26,30 +33,24 @@ class User(models.Model):
     x = models.FloatField()
     y = models.FloatField()
     STATUS_LABRATORY = "0"
-    STATUS_ADMINISTRAROR = "1"
+    STATUS_ADMINISTRATOR = "1"
     STATUS_MEMBER = "2"
     STATUS_SET = (
             (STATUS_LABRATORY,"---"),
-            (STATUS_ADMINISTRAROR, "管理者"),
+            (STATUS_ADMINISTRATOR, "管理者"),
             (STATUS_MEMBER, "メンバー"),
     )
-    field2 = models.CharField(choices=STATUS_SET,default=STATUS_LABRATORY,max_length=8)
+    status = models.CharField(choices=STATUS_SET,default=STATUS_LABRATORY,max_length=8)
+    labratory = models.ForeignKey(Labratory,on_delete=models.CASCADE)
     def __repr__(self):
         return "{}:{}".format(self.pk,self.name)
-    __str__ = __repr__
-
-class Labratory(models.Model):
-    labratory_name = models.CharField(max_length=32)
-    member = models.ManyToManyField(User,verbose_name='所属メンバー')
-    def __repr__(self):
-        return "{}:{}".format(self.pk,self.labratory_name)
     __str__ = __repr__
 
 class Schedule(models.Model):
     enter = models.DateTimeField(auto_created=True)
     exit = models.DateTimeField(auto_created=True)
-    userid = models.ManyToManyField(User,verbose_name='ユーザID')
-    labid = models.ManyToManyField(Labratory,verbose_name='研究室ID')
+    userid = models.ForeignKey(User,on_delete=models.CASCADE)
+    labid = models.ForeignKey(Labratory,on_delete=models.CASCADE)
 
     def __repr__(self):
         return "{}".format(self.pk)
