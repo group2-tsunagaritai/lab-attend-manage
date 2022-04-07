@@ -1,5 +1,5 @@
 import { AuthContext } from "../utils/auth/Auth";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 export default function Header() {
   const { authData, setAuthData } = useContext(AuthContext);
   console.log("authData", authData);
@@ -16,7 +16,7 @@ export default function Header() {
               <a href={`/users/${authData.uid}`}>マイページ</a>
             </li>
             <li>
-              <a href="/laboratories">研究室</a>
+              <a href={`/laboratories/${authData.lid}`}>研究室</a>
             </li>
             <li>
               <a href={`/users/${authData.uid}/log`}>在室記録</a>
@@ -31,6 +31,7 @@ export default function Header() {
                     JSON.stringify({ jwt: "", uid: "", lid: "" })
                   );
                   setAuthData({ jwt: "", uid: "", lid: "" });
+                  window.location.href = "/";
                 }}
               >
                 SignOut
