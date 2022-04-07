@@ -3,31 +3,32 @@ import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function Users() {
-  const { authData, setAuthData } = useContext(AuthContext);
+  const { authData } = useContext(AuthContext);
   const location = useLocation();
+  console.log(authData.uid, location.pathname.split("/")[2]);
   if (location.pathname.split("/")[2] === authData.uid)
     return (
       <div>
         <h2 className="title">ユーザ情報</h2>
-        <div className="grid">
-          <div >
-            <h3>ID</h3>
-            <p>{"aaaaaaaa"}</p>
-          </div>
-          <div >
-            <h3>ユーザ名</h3>
-            <p>{"aaaaaaaa"}</p>
-          </div>
-          <div >
-            <h3>E-mail</h3>
-            <p>{"aaaaaaaa"}</p>
-          </div>
-          <div >
-            <h3>ユーザ名</h3>
-            <p>{"aaaaaaaa"}</p>
-          </div>
-          <a href={`./${authData.uid}/edit`}><button className="button">編集</button></a>
-        </div>
+        <table className="table">
+          <tbody>
+            <tr>
+              <th>ID</th>
+              <td>{"aaaaaaa"}</td>
+            </tr>
+            <tr>
+              <th>E-mail</th>
+              <td>{"aaaaaaa@aaaa.com"}</td>
+            </tr>
+            <tr>
+              <th>ユーザ名</th>
+              <td>{"aaaaaaa"}</td>
+            </tr>
+          </tbody>
+        </table>
+        <a href={`./${authData.uid}/edit`}>
+          <button className="button">編集</button>
+        </a>
       </div>
     );
   else return <div></div>;
